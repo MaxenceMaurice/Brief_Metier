@@ -2,7 +2,7 @@ from datetime import datetime, date
 from enum import Enum
 from typing import Optional
 
-from sqlmodel import SQLModel, Field
+from sqlmodel import Relationship, SQLModel, Field
 from sqlalchemy import JSON
 
 
@@ -31,6 +31,7 @@ class Apprenant(SQLModel, table=True):
     date_inscription_plateforme: datetime = Field(default_factory=datetime.now)
     certification_obtenue: Optional[str] = None
 
+
 class Formateur(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     nom: str = Field(max_length=50)
@@ -43,7 +44,6 @@ class Formateur(SQLModel, table=True):
     date_embauche: date
     taux_horaire:float = Field(ge=0)
     bio: Optional[str] = None
-
 class StaffPedagogique(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     nom: str = Field(max_length=50)

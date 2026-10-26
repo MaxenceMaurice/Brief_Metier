@@ -10,6 +10,3 @@ class Salle(SQLModel, table=True):
   capacite: int = Field(gt=0, nullable=False)
   localisation: str
   is_active: bool = Field(default=True)
-
-  # Relations
-  sessions: List["Session"] = Relationship(back_populates="salle")

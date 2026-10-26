@@ -24,8 +24,3 @@ class Session(SQLModel, table=True):
     # Clés étrangères
     salle_id: int = Field(foreign_key="salle.id")
     formateur_id: int = Field(foreign_key="formateur.id")
-
-    # Relations
-    salle: Optional["Salle"] = Relationship(back_populates="sessions")
-    formateur: Optional["Formateur"] = Relationship(back_populates="sessions")
-    inscriptions: List["Inscription"] = Relationship(back_populates="session")
