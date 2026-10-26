@@ -16,19 +16,19 @@ class NiveauAcces(str, Enum):
     SUPERADMIN = "SUPERADMIN"
     ADMIN_STANDARD = "ADMIN_STANDARD"
 
-#Nous avons choisit de partir sur des classes qui n'hérite pas de Utilisateur.
+#Nous avons choisit de partir sur des classes qui n'héritent pas d'une classe Utilisateur.
 class Apprenant(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     nom: str = Field(max_length=50)
     prenom: str = Field(max_length=50)
     email: str = Field(unique=True)
-    date_creation: datetime = Field(default_factory=datetime.now(timezone.utc))
+    date_creation: datetime = Field(default_factory=lambda:datetime.now(timezone.utc))
     is_active: bool = Field(default=True)
     role: Role = Field(default=Role.apprenant)
     date_naissance: date
     niveau_etude: Optional[str] = None
     telephone: Optional[str] = None
-    date_inscription_plateforme: datetime = Field(default_factory = datetime.now(timezone.utc))
+    date_inscription_plateforme: datetime = Field(default_factory=lambda:datetime.now(timezone.utc))
     certification_obtenue: Optional[str] = None
 
 class Formateur(SQLModel, table=True):
@@ -36,7 +36,7 @@ class Formateur(SQLModel, table=True):
     nom: str = Field(max_length=50)
     prenom: str = Field(max_length=50)
     email: str = Field(unique=True)
-    date_creation: datetime = Field(default_factory=datetime.now(timezone.utc))
+    date_creation: datetime = Field(default_factory=lambda:datetime.now(timezone.utc))
     is_active: bool = Field(default=True)
     role: Role = Field(default=Role.formateur)
     specialite: str
@@ -49,7 +49,7 @@ class StaffPedagogique(SQLModel, table=True):
     nom: str = Field(max_length=50)
     prenom: str = Field(max_length=50)
     email: str = Field(unique=True)
-    date_creation: datetime = Field(default_factory=datetime.now(timezone.utc))
+    date_creation: datetime = Field(default_factory=lambda:datetime.now(timezone.utc))
     is_active: bool = Field(default=True)
     role: Role = Field(default=Role.staff)
     poste: str
@@ -64,11 +64,13 @@ class Admin(SQLModel, table=True):
     nom: str = Field(max_length=50)
     prenom: str = Field(max_length=50)
     email: str = Field(unique=True)
-    date_creation: datetime = Field(default_factory=datetime.now(timezone.utc))
+    date_creation: datetime = Field(default_factory=lambda:datetime.now(timezone.utc))
     is_active: bool = Field(default=True)
     role: Role = Field(default=Role.admin)
     niveau_acces: NiveauAcces
     date_promotion: date
+
+
 
 
     
