@@ -1,4 +1,4 @@
-from datetime import datetime, date, timezone
+from datetime import datetime, date
 from enum import Enum
 from typing import Optional
 
@@ -22,13 +22,13 @@ class Apprenant(SQLModel, table=True):
     nom: str = Field(max_length=50)
     prenom: str = Field(max_length=50)
     email: str = Field(unique=True)
-    date_creation: datetime = Field(default_factory=lambda:datetime.now(timezone.utc))
+    date_creation: datetime = Field(default_factory=datetime.now)
     is_active: bool = Field(default=True)
     role: Role = Field(default=Role.apprenant)
     date_naissance: date
     niveau_etude: Optional[str] = None
     telephone: Optional[str] = None
-    date_inscription_plateforme: datetime = Field(default_factory=lambda:datetime.now(timezone.utc))
+    date_inscription_plateforme: datetime = Field(default_factory=datetime.now)
     certification_obtenue: Optional[str] = None
 
 class Formateur(SQLModel, table=True):
@@ -36,7 +36,7 @@ class Formateur(SQLModel, table=True):
     nom: str = Field(max_length=50)
     prenom: str = Field(max_length=50)
     email: str = Field(unique=True)
-    date_creation: datetime = Field(default_factory=lambda:datetime.now(timezone.utc))
+    date_creation: datetime = Field(default_factory=datetime.now)
     is_active: bool = Field(default=True)
     role: Role = Field(default=Role.formateur)
     specialite: str
@@ -49,7 +49,7 @@ class StaffPedagogique(SQLModel, table=True):
     nom: str = Field(max_length=50)
     prenom: str = Field(max_length=50)
     email: str = Field(unique=True)
-    date_creation: datetime = Field(default_factory=lambda:datetime.now(timezone.utc))
+    date_creation: datetime = Field(default_factory=datetime.now)
     is_active: bool = Field(default=True)
     role: Role = Field(default=Role.staff)
     poste: str
@@ -64,7 +64,7 @@ class Admin(SQLModel, table=True):
     nom: str = Field(max_length=50)
     prenom: str = Field(max_length=50)
     email: str = Field(unique=True)
-    date_creation: datetime = Field(default_factory=lambda:datetime.now(timezone.utc))
+    date_creation: datetime = Field(default_factory=datetime.now)
     is_active: bool = Field(default=True)
     role: Role = Field(default=Role.admin)
     niveau_acces: NiveauAcces
