@@ -1,3 +1,4 @@
+import re
 from datetime import date, datetime
 from typing import Optional
 from pydantic import BaseModel, EmailStr, Field, field_validator
@@ -30,6 +31,15 @@ class ApprenantCreate(UtilisateurCreate):
                 raise ValueError("L'apprenant doit avoir aumoins 16 ans.")
             
             return valeur 
+
+    @field_validator("telephone")
+    @classmethod
+    def verifier_telephone(cls, valeur: Optional[str]) -> Optional[str]:
+        if valeur is None:
+            return None
+        if not re.match(r"^0[1-9]\d{8}$", valeur):
+            raise ValueError("Le téléphone doit contenir 10 chiffres (ex: 0612345678).")
+        return valeur
 
 
 class FormateurCreate(Utilisateur, table=True):
