@@ -2,7 +2,7 @@ from datetime import datetime, date
 from enum import Enum
 from typing import Optional
 
-from sqlmodel import Relationship, SQLModel, Field
+from sqlmodel import SQLModel, Field
 from sqlalchemy import JSON
 
 
