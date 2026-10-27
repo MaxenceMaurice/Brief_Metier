@@ -6,6 +6,7 @@ from sqlmodel import Relationship, SQLModel, Field
 from sqlalchemy import JSON
 
 
+
 class Role(str, Enum):
     apprenant = "apprenant"
     formateur = "formateur"
@@ -16,14 +17,18 @@ class NiveauAcces(str, Enum):
     SUPERADMIN = "SUPERADMIN"
     ADMIN_STANDARD = "ADMIN_STANDARD"
 
-#Nous avons choisit de partir sur des classes qui n'héritent pas d'une classe Utilisateur.
-class Apprenant(SQLModel, table=True):
+
+class Utilisateur(SQLModel):
     id: int | None = Field(default=None, primary_key=True)
     nom: str = Field(max_length=50)
     prenom: str = Field(max_length=50)
     email: str = Field(unique=True)
     date_creation: datetime = Field(default_factory=datetime.now)
     is_active: bool = Field(default=True)
+    role: Role = Field(default=Role.apprenant)
+
+
+class Apprenant(Utilisateur, table=True):
     role: Role = Field(default=Role.apprenant)
     date_naissance: date
     niveau_etude: Optional[str] = None
@@ -32,26 +37,14 @@ class Apprenant(SQLModel, table=True):
     certification_obtenue: Optional[str] = None
 
 
-class Formateur(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    nom: str = Field(max_length=50)
-    prenom: str = Field(max_length=50)
-    email: str = Field(unique=True)
-    date_creation: datetime = Field(default_factory=datetime.now)
-    is_active: bool = Field(default=True)
-    role: Role = Field(default=Role.formateur)
+class Formateur(Utilisateur, table=True):
     specialite: str
     date_embauche: date
     taux_horaire:float = Field(ge=0)
     bio: Optional[str] = None
-class StaffPedagogique(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    nom: str = Field(max_length=50)
-    prenom: str = Field(max_length=50)
-    email: str = Field(unique=True)
-    date_creation: datetime = Field(default_factory=datetime.now)
-    is_active: bool = Field(default=True)
-    role: Role = Field(default=Role.staff)
+
+
+class StaffPedagogique(Utilisateur, table=True):
     poste: str
     date_prise_fonction: date
     responsabilites: Optional[dict] = Field(
@@ -59,14 +52,7 @@ class StaffPedagogique(SQLModel, table=True):
         sa_type=(JSON)
     )
 
-class Admin(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    nom: str = Field(max_length=50)
-    prenom: str = Field(max_length=50)
-    email: str = Field(unique=True)
-    date_creation: datetime = Field(default_factory=datetime.now)
-    is_active: bool = Field(default=True)
-    role: Role = Field(default=Role.admin)
+class Admin(Utilisateur, table=True):
     niveau_acces: NiveauAcces
     date_promotion: date
 
