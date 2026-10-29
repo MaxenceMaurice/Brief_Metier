@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional, Dict, List, Union
 from pydantic import BaseModel, model_validator
-from models.session import StatutSessionEnum
+from models.session import StatutSession  
 
 class SessionCreate(BaseModel):
     titre: str
@@ -9,7 +9,7 @@ class SessionCreate(BaseModel):
     date_debut: datetime
     date_fin: datetime
     capacite_max: int
-    statut: StatutSessionEnum = StatutSessionEnum.OPEN
+    statut: StatutSession = StatutSession.OPEN  
     salle_id: int
     formateur_id: int
     prerequis: Optional[Union[Dict, List[str]]] = None
@@ -26,7 +26,7 @@ class SessionUpdate(BaseModel):
     date_debut: Optional[datetime] = None
     date_fin: Optional[datetime] = None
     capacite_max: Optional[int] = None
-    statut: Optional[StatutSessionEnum] = None
+    statut: Optional[StatutSession] = None 
     salle_id: Optional[int] = None
     formateur_id: Optional[int] = None
     prerequis: Optional[Union[Dict, List[str]]] = None

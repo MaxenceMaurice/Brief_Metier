@@ -1,12 +1,12 @@
 import re
 from datetime import date, datetime
 from typing import Optional
-from sqlmodel import JSON
 from pydantic import BaseModel, EmailStr, Field, field_validator
-from models.user import Role, NiveauAcces, Utilisateur
+from models.user import Role, NiveauAcces
+
 class UtilisateurCreate(BaseModel):
-    nom: str = Field(min_length=1, max_lenght=50)
-    prenom: str = Field(min_length=1, max_lenght=50)
+    nom: str = Field(min_length=1, max_length=50)
+    prenom: str = Field(min_length=1, max_length=50)
     email: EmailStr
     is_active: bool = True
 
@@ -20,17 +20,17 @@ class ApprenantCreate(UtilisateurCreate):
 
     @field_validator("date_naissance")
     @classmethod
-    def verifier_age(cls, valeur:date) -> date:
+    def verifier_age(cls, valeur: date) -> date:
         aujourd_hui = date.today()
     
         if aujourd_hui.year - valeur.year < 16:
-            raise ValueError("L'apprenant doit avoir aumoins 16 ans.")
+            raise ValueError("L'apprenant doit avoir au moins 16 ans.")
 
         if aujourd_hui.year - valeur.year == 16:
             if (valeur.month, valeur.day) > (aujourd_hui.month, aujourd_hui.day):
-                raise ValueError("L'apprenant doit avoir aumoins 16 ans.")
+                raise ValueError("L'apprenant doit avoir au moins 16 ans.")
             
-            return valeur 
+        return valeur 
 
     @field_validator("telephone")
     @classmethod
@@ -42,34 +42,32 @@ class ApprenantCreate(UtilisateurCreate):
         return valeur
 
 
-class FormateurCreate(Utilisateur, table=True):
+class FormateurCreate(UtilisateurCreate):
+    role: Role = Field(default=Role.formateur)
     specialite: str
     date_embauche: date
-    taux_horaire:float = Field(ge=0)
+    taux_horaire: float = Field(ge=0)
     bio: Optional[str] = None
 
     @field_validator("date_embauche")
     @classmethod
-    def verifier_date_embauche(cls,valeur:date) -> date:
+    def verifier_date_embauche(cls, valeur: date) -> date:
         if valeur > date.today():
             raise ValueError("La date d'embauche ne peut pas être dans le futur.")
-        
         return valeur
 
-    
 
-class StaffPedagogique(Utilisateur, table=True):
+class StaffCreate(UtilisateurCreate):
+    role: Role = Field(default=Role.staff)
     poste: str
     date_prise_fonction: date
-    responsabilites: Optional[dict] = Field(
-        default=None,
-        sa_type=(JSON)
-    )
+    responsabilites: Optional[dict] = None
 
 
-class Admin(Utilisateur, table=True):
+class AdminCreate(UtilisateurCreate):
+    role: Role = Field(default=Role.admin)
     niveau_acces: NiveauAcces
-    date_promotion: date  
+    date_promotion: date
         
 
 
