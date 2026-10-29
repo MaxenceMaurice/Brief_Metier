@@ -1,5 +1,6 @@
 from typing import List, Optional
-from sqlmodel import Field, Relationship, SQLModel
+from sqlmodel import Field, SQLModel
+from sqlalchemy import Column, JSON
 
 
 class Salle(SQLModel, table=True):
@@ -10,3 +11,4 @@ class Salle(SQLModel, table=True):
   capacite: int = Field(gt=0, nullable=False)
   localisation: str
   is_active: bool = Field(default=True)
+  equipements: dict | None = Field(default=None, sa_column=Column(JSON))

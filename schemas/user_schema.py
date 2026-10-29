@@ -1,9 +1,9 @@
 import re
 from datetime import date, datetime
 from typing import Optional
+from sqlmodel import JSON
 from pydantic import BaseModel, EmailStr, Field, field_validator
-from models.user import Role, NiveauAcces
-
+from models.user import Role, NiveauAcces, Utilisateur
 class UtilisateurCreate(BaseModel):
     nom: str = Field(min_length=1, max_lenght=50)
     prenom: str = Field(min_length=1, max_lenght=50)

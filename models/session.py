@@ -1,7 +1,7 @@
 from datetime import datetime
 from enum import Enum
-from typing import Optional, List
-from sqlmodel import SQLModel, Field, Relationship
+from typing import Optional, List, Union, Dict
+from sqlmodel import SQLModel, Field, Column, JSON
 
 
 class StatutSession(str, Enum):
@@ -20,6 +20,7 @@ class Session(SQLModel, table=True):
     date_fin: datetime = Field(nullable=False)
     capacite_max: int = Field(gt=0, nullable=False)
     statut: StatutSession = Field(default=StatutSession.OPEN)
+    prerequis: Optional[Union[Dict, List[str]]] = Field(default=None, sa_column=Column(JSON))
 
     # Clés étrangères
     salle_id: int = Field(foreign_key="salle.id")

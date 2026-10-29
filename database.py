@@ -1,4 +1,4 @@
-from sqlmodel import SQLModel, create_engine
+from sqlmodel import SQLModel, create_engine, Session
 
 DATABASE_URL = "sqlite:///./database.db"
 
@@ -11,6 +11,10 @@ import models.inscription
 
 def creer_tables():
     SQLModel.metadata.create_all(engine)
+
+def get_session():
+    with Session(engine) as session:
+        yield session
 
 if __name__ == "__main__":
     creer_tables()
