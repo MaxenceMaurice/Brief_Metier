@@ -2,8 +2,10 @@ from typing import List, Optional
 from sqlmodel import Field, SQLModel
 from sqlalchemy import Column, JSON
 
-
+#classe pour les salles possibles.
 class Salle(SQLModel, table=True):
+  """ Informations sur les salles. """
+  
   __tablename__ = "salle"
 
   id: Optional[int] = Field(default=None, primary_key=True)

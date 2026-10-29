@@ -4,13 +4,16 @@ from typing import Optional
 
 from sqlmodel import SQLModel, Field, UniqueConstraint
 
+#Les différents statuts de l'inscription.
 class StatutInscription(str, Enum):
+    """ Liste des statuts possible pour une inscription. """
     ENREGISTRE = "ENREGISTRE"
     DESINSCRIT = "DESINSCRIT"
     EN_ATTENTE = "EN_ATTENTE"
 
+#Classe pour les inscriptions des apprenants aux sessions.
 class Inscription(SQLModel, table=True):
-    # Ajout de la contrainte d'unicité sur le couple apprenant / session
+    """ Informations pour les inscriptions des apprenants. """
     __table_args__ = (
         UniqueConstraint("apprenant_id", "session_id", name="unique_apprenant_session"),
     )
