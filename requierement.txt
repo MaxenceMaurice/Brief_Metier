@@ -1,3 +1,4 @@
 sqlmodel
 alembic
 email-validator
+streamlit
