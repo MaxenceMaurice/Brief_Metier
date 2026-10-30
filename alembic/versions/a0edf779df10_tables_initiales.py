@@ -1,8 +1,8 @@
-"""Creation tables
+"""tables initiales
 
-Revision ID: cde532f988a2
+Revision ID: a0edf779df10
 Revises: 
-Create Date: 2026-10-28 09:19:39.464369
+Create Date: 2026-10-30 01:48:25.682864
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'cde532f988a2'
+revision: str = 'a0edf779df10'
 down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -71,6 +71,7 @@ def upgrade() -> None:
     sa.Column('capacite', sa.Integer(), nullable=False),
     sa.Column('localisation', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
     sa.Column('is_active', sa.Boolean(), nullable=False),
+    sa.Column('equipements', sa.JSON(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_salle_nom'), 'salle', ['nom'], unique=True)
@@ -96,6 +97,7 @@ def upgrade() -> None:
     sa.Column('date_fin', sqlmodel.sql.sqltypes.UTCDateTime(), nullable=False),
     sa.Column('capacite_max', sa.Integer(), nullable=False),
     sa.Column('statut', sa.Enum('OPEN', 'CLOSED', 'ARCHIVED', name='statutsession'), nullable=False),
+    sa.Column('prerequis', sa.JSON(), nullable=True),
     sa.Column('salle_id', sa.Integer(), nullable=False),
     sa.Column('formateur_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['formateur_id'], ['formateur.id'], ),
@@ -111,7 +113,8 @@ def upgrade() -> None:
     sa.Column('presence', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['apprenant_id'], ['apprenant.id'], ),
     sa.ForeignKeyConstraint(['session_id'], ['session.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('apprenant_id', 'session_id', name='unique_apprenant_session')
     )
     # ### end Alembic commands ###
 
