@@ -139,27 +139,42 @@ Le diagramme Mermaid définitif sera ajouté après vérification de l'ensemble 
 
 ```text
 .
-├── alembic.ini
-├── database.py
-├── seed.py
-├── README.md
-├── requierement.txt
-├── .vscode/
-│   └── settings.json
 ├── alembic/
+│   ├── versions/
 │   ├── env.py
 │   ├── README
 │   └── script.py.mako
 ├── models/
+│   ├── __init__.py
 │   ├── inscription.py
 │   ├── salle.py
 │   ├── session.py
-│   ├── user.py
-│   └── __init__.py
-└── schemas/
-    ├── inscription_schemas.py
-    ├── session_schemas.py
-    └── user_schema.py
+│   └── user.py
+├── pages/
+│   ├── 1_Users.py
+│   ├── 2_Salles.py
+│   ├── 3_Sessions.py
+│   └── 4_Inscriptions.py
+├── schemas/
+│   ├── inscription_schemas.py
+│   ├── session_schemas.py
+│   └── user_schema.py
+├── tests/
+│   ├── test_inscription_service.py
+│   ├── test_permissions.py
+│   ├── test_salle_disponible.py
+│   └── test_session_service.py
+├── .gitignore
+├── README.md
+├── alembic.ini
+├── app.py
+├── database.py
+├── demo.py
+├── inscription_service.py
+├── permissions.py
+├── requierement.txt
+├── salle_disponible.py
+└── session_service.py
 ```
 
 Les dossiers `__pycache__` et les fichiers `.pyc`, générés automatiquement par Python, ne sont pas représentés ici.
