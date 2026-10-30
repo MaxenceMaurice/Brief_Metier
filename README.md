@@ -173,10 +173,11 @@ Git : création du `.gitignore` pour exclure les caches Python et la BDD locale.
 | Fichier ou dossier | Description |
 |---|---|
 | `database.py` | Configuration de la connexion à la base de données. |
-| `seed.py` | Génération de données de démonstration. |
+| `pages/` | Contient les différentes pages de l'application Streamlit. |
 | `models/` | Définition des modèles de données. |
 | `schemas/` | Définition des schémas de validation. |
 | `alembic/` | Fichiers nécessaires à la gestion des migrations. |
+| `tests/` | Contient des l'ensemble des scripts de tests. |
 | `alembic.ini` | Configuration d'Alembic. |
 | `requierement.txt` | Fichier de dépendances fourni par le formateur. |
 
