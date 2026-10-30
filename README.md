@@ -180,29 +180,7 @@ Git : création du `.gitignore` pour exclure les caches Python et la BDD locale.
 | `alembic.ini` | Configuration d'Alembic. |
 | `requierement.txt` | Fichier de dépendances fourni par le formateur. |
 
-## 7. Données de démonstration
-
-Le fichier `seed.py` permet de peupler la base avec des données de démonstration.
-
-Le jeu de données généré comprend :
-
-- 4 salles.
-- 3 formateurs.
-- 10 apprenants.
-- 1 membre du staff pédagogique.
-- 1 administrateur de niveau `SUPERADMIN`.
-- 4 sessions de formation.
-- Des inscriptions associant les apprenants à certaines sessions.
-
-Certaines valeurs sont générées aléatoirement, notamment les noms et prénoms des apprenants, les capacités des salles et le choix des sessions pour les inscriptions.
-
-Les dates des sessions sont calculées à partir de la date et de l'heure d'exécution du script.
-
-Le script vérifie si une inscription existe déjà pour le couple apprenant-session choisi avant de l'ajouter. En revanche, il ne vérifie pas l'existence préalable des salles, utilisateurs ou sessions avant de les créer.
-
-Ce script est destiné à préparer des données de démonstration ; il ne remplace pas les validations métier.
-
-## 8. Validation des données
+## 7. Validation des données
 
 Les schémas du dossier `schemas/` utilisent Pydantic pour définir les données attendues lors de la création ou de la mise à jour de certaines entités.
 
@@ -221,7 +199,7 @@ Les modèles définissent également plusieurs contraintes, notamment l'unicité
 
 L'ensemble des règles métier prévues par le cahier des charges, notamment les chevauchements de sessions et le respect de la capacité des salles, devra être vérifié dans les schémas et les tests avant d'être présenté comme entièrement implémenté.
 
-## 9. Migrations de la base de données
+## 8. Migrations de la base de données
 
 Le projet utilise Alembic pour gérer les évolutions du schéma de la base de données.
 
@@ -229,18 +207,18 @@ Le projet utilise Alembic pour gérer les évolutions du schéma de la base de d
 
 Les fichiers de migration doivent encore être publiés sur le dépôt GitHub partagé. Cette section sera complétée après récupération et vérification des fichiers.
 
-## 10. Installation et utilisation
+## 9. Installation et utilisation
 
 Les instructions d'installation, de configuration de l'environnement Python et d'exécution du projet seront complétées après vérification des dépendances et des commandes utilisées par l'équipe.
 
 La base SQLite locale n'est pas fournie sur le dépôt partagé.
 
-## 11. Autres tests effectués et problèmes rencontrés
+## 10. Autres tests effectués et problèmes rencontrés
 
 - 8 tests sur 8 réalisés et réussis dans le cadre du projet. Légère difficulté avec le fuseau horaire, corrigé avec UTC. Tests sur une BDD en mémoire pour protéger database.db.
 - Streamlit : améliorations enregistrées, syntaxe vérifiée sans erreur (fonctionnement complet encore à tester).
 
-## 12. Répartition du travail
+## 11. Répartition du travail
 
 ### Maxence
 
@@ -259,12 +237,12 @@ La base SQLite locale n'est pas fournie sur le dépôt partagé.
 - Gestion de la création et des modifications du fichier README.md.
 - Création du diaporama.
 
-## 13. Installation et lancement des tests :
+## 12. Installation et lancement des tests :
 
 python -m pip install pytest
 python -m pytest test_permissions.py test_salle_disponible.py -v
 
-## 14. Évolutions possibles
+## 13. Évolutions possibles
 
 - Développer une interface graphique ou web pour faciliter la gestion des données.
 - Ajouter un tableau de bord pour visualiser les sessions, les inscriptions et l'occupation des salles.
