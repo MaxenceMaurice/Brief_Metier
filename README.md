@@ -266,3 +266,6 @@ python -m pytest tests/ -v --tb=short
 - Développer une interface graphique ou web pour faciliter la gestion des données.
 - Ajouter un tableau de bord pour visualiser les sessions, les inscriptions et l'occupation des salles.
 - Compléter la documentation technique.
+
+MCD:
+![MCD](Docs/MCD.png)
