@@ -27,7 +27,7 @@ pip install -r requierement.txt
 
 ### 2.2 Exécution des tests
 
-python -m pytest -v --tb=short
+python -m pytest tests/ -v --tb=short
 
 ### 2.3 Gestion des migrations avec Alembic
 
@@ -239,14 +239,17 @@ La base SQLite locale n'est pas fournie sur le dépôt partagé.
 ### Maxence
 
 - Mise en place de GitHub.
-- Mise en place de la base de données.
 - Réalisation des schémas et du diagramme de données.
+- Développement des classes relatives aux sessions et aux salles.
 - Utilisation et configuration d'Alembic pour les migrations.
+- Développement Streamlit.
 
 ### Benjamin
 
-- Développement des classes relatives aux sessions, aux salles, aux utilisateurs et aux inscriptions.
+- Développement des classes relatives aux utilisateurs et aux inscriptions.
 - Utilisation de Pydantic pour la validation des données.
+- Utilisation et configuration d'Alembic pour les migrations.
+- Développement des tests.
 
 ### Alexia
 
@@ -256,7 +259,7 @@ La base SQLite locale n'est pas fournie sur le dépôt partagé.
 ## 12. Installation et lancement des tests :
 
 python -m pip install pytest
-python -m pytest test_permissions.py test_salle_disponible.py -v
+python -m pytest tests/ -v --tb=short
 
 ## 13. Évolutions possibles
 
